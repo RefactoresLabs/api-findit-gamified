@@ -3,24 +3,46 @@ API  e motor de gamificação para o ecossistema FindIt. Gerencia o inventário 
 
 Estrutura de Pastas
 ```text
-.
-├── /backend               # Camada de Lógica e Dados (Python)
-   ├── /src
-      ├── /api           # Controllers (Entrada da API e Autenticação)
-      │   └── /dtos      # Objetos de Transferência de Dados
-      │
-      ├── /core          # Regras de Negócio
-      │   ├── /entities  # Modelos de domínio (Item, Usuário)
-      │   ├── /factories # Factory Pattern (Criação de tipos de itens)
-      │   └── /services  # Lógica principal e Observers
-      │
-      ├── /infrastructure # Detalhes técnicos e ferramentas
-      │   ├── /auth      # Implementação da Autenticação Básica
-      │   ├── /security  # SHA-3 Adapter (Isolamento da criptografia)
-      │   └── /storage   # Lógica de upload (Imagens 10MB)
-      │
-      ├── /repositories  # Repository Pattern (Interface com o Banco)
-      │
-      └── /utils # Diretório dedicado a armazenar funções, classes ou métodos auxiliares que realizam tarefas genéricas, repetitivas e de suporte técnico.
-   
-   
+backend/
+│
+├── app/
+│   │
+│   ├── presentation/                 # Camada de apresentação (API REST)
+│   │   ├── controllers/              # Controladores que recebem requisições HTTP e chamam os serviços da aplicação
+│   │   ├── routes/                   # Definição das rotas/endpoints da API
+│   │   ├── schemas/                  # Modelos de entrada e saída da API (validação e serialização - ex: Pydantic)
+│   │
+│   ├── application/                  # Camada de aplicação (casos de uso do sistema)
+│   │   ├── services/                 # Implementação dos casos de uso e orquestração das regras de negócio
+│   │   ├── dto/                      # Objetos de transferência de dados entre apresentação e domínio
+│   │
+│   ├── domain/                       # Núcleo do sistema (regras de negócio independentes de tecnologia)
+│   │   ├── entities/                 # Entidades principais do sistema (Usuário, Item, Pedido de Devolução)
+│   │   ├── value_objects/            # Objetos de valor imutáveis (Endereço, Coordenadas, Categoria)
+│   │   ├── repositories/             # Interfaces de repositório (contratos de persistência)
+│   │   ├── strategies/               # Implementações do padrão Strategy (ex: ordenação de itens)
+│   │   ├── specifications/           # Implementações do padrão Specification (filtros e critérios de busca)
+│   │   ├── states/                   # Implementações do padrão State (estados do pedido de devolução)
+│   │   ├── observers/                # Implementações do padrão Observer (eventos e pontuação)
+│   │   ├── enums/                    # Enumerações do domínio (ex: status, categorias)
+│   │   ├── exceptions/               # Exceções específicas do domínio
+│   │
+│   ├── infrastructure/               # Camada de infraestrutura (detalhes técnicos e externos)
+│   │   ├── persistence/
+│   │   │   ├── models/               # Modelos do banco de dados (ORM)
+│   │   │   ├── repositories/         # Implementações concretas dos repositórios
+│   │   │
+│   │   ├── external/
+│   │   │   ├── maps/                 # Integração com APIs externas (Adapter Pattern - ex: geolocalização)
+│   │   │
+│   │   ├── security/                 # Serviços de segurança (hash de senha, autenticação, criptografia)
+│   │   ├── storage/                  # Manipulação de arquivos (upload e armazenamento de imagens)
+│   │   ├── config/                   # Configurações da aplicação (banco, variáveis de ambiente)
+│   │
+│   ├── shared/                       # Código compartilhado entre camadas
+│   │   ├── utils/                    # Funções utilitárias
+│   │   ├── validators/               # Validações genéricas reutilizáveis
+│   │   ├── constants/                # Constantes globais do sistema
+│   │
+│   ├── main.py                       # Ponto de entrada da aplicação (inicialização do servidor)
+
