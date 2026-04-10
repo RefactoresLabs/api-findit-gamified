@@ -10,11 +10,13 @@ backend/
 │   ├── presentation/                 # Camada de apresentação (API REST)
 │   │   ├── controllers/              # Controladores que recebem requisições HTTP e chamam os serviços da aplicação
 │   │   ├── routes/                   # Definição das rotas/endpoints da API
-│   │   ├── schemas/                  # Modelos de entrada e saída da API (validação e serialização - ex: Pydantic)
+│   │   ├── schemas/                  # Modelos de entrada e saída da API
 │   │
 │   ├── application/                  # Camada de aplicação (casos de uso do sistema)
-│   │   ├── services/                 # Implementação dos casos de uso e orquestração das regras de negócio
-│   │   ├── dto/                      # Objetos de transferência de dados entre apresentação e domínio
+│   │   ├── services/                 # Lógicas reutilizáveis utilizadas pelos casos de uso
+│   │   ├── dtos/                      # Objetos de transferência de dados entre apresentação e domínio
+│   │   ├── use_cases/                # Casos de uso
+│   │   ├── interfaces/               # Interfaces fora do domínio
 │   │
 │   ├── domain/                       # Núcleo do sistema (regras de negócio independentes de tecnologia)
 │   │   ├── entities/                 # Entidades principais do sistema (Usuário, Item, Pedido de Devolução)
@@ -23,7 +25,6 @@ backend/
 │   │   ├── strategies/               # Implementações do padrão Strategy (ex: ordenação de itens)
 │   │   ├── specifications/           # Implementações do padrão Specification (filtros e critérios de busca)
 │   │   ├── states/                   # Implementações do padrão State (estados do pedido de devolução)
-│   │   ├── observers/                # Implementações do padrão Observer (eventos e pontuação)
 │   │   ├── enums/                    # Enumerações do domínio (ex: status, categorias)
 │   │   ├── exceptions/               # Exceções específicas do domínio
 │   │
@@ -37,12 +38,7 @@ backend/
 │   │   │
 │   │   ├── security/                 # Serviços de segurança (hash de senha, autenticação, criptografia)
 │   │   ├── storage/                  # Manipulação de arquivos (upload e armazenamento de imagens)
-│   │   ├── config/                   # Configurações da aplicação (banco, variáveis de ambiente)
-│   │
-│   ├── shared/                       # Código compartilhado entre camadas
-│   │   ├── utils/                    # Funções utilitárias
-│   │   ├── validators/               # Validações genéricas reutilizáveis
-│   │   ├── constants/                # Constantes globais do sistema
+│   │   ├── database/                   # Conexões e sessões do banco de dados
 │   │
 │   ├── main.py                       # Ponto de entrada da aplicação (inicialização do servidor)
 
