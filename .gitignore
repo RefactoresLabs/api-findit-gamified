@@ -6,3 +6,6 @@
 
 # Cache
 **/__pycache__
+
+# Cache - Pytest
+**/.pytest_cache
