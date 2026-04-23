@@ -12,3 +12,6 @@ class UserAccountRepositoryInterface(ABC):
 
     @abstractmethod
     def get_user_account_by_id(self, id: int) -> UserAccount: ...
+
+    @abstractmethod
+    def get_user_account_by_email(self, email: str) -> UserAccount | None: ...
