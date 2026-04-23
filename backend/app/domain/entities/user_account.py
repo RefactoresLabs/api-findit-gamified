@@ -21,7 +21,7 @@ class UserAccount:
             Telefone do usuário
         """
 
-        self.__full_name = name
+        self.__name = name
         self.__email = email
         self.__password = password
         self.__phone = phone
@@ -38,7 +38,7 @@ class UserAccount:
         
         """
 
-        return self.__full_name
+        return self.__name
 
     @property
     def email(self) -> str:
