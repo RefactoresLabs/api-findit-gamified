@@ -45,6 +45,7 @@ class UserAccountRepository(UserAccountRepositoryInterface):
         )
 
         self.__session.add(user_account_registry)
+        self.__session.flush()
     
     def update_user_account(self, user_account: UserAccount, id: int) -> UserAccount:
 
@@ -83,5 +84,38 @@ class UserAccountRepository(UserAccountRepositoryInterface):
         """
 
         pass
+
+    def get_user_account_by_email(self, email: str) -> UserAccount | None:
+
+        """Obtém uma instância da tabela user_account através do email
+
+        Parameters
+        ----------
+        email: str
+            E-mail da conta do usuário a ser obtida
+
+        Returns
+        -------
+        UserAccount | None
+            Objeto da entidade conta de usuário com os dados buscados. 'None' se nenhuma conta de usuário for encontrada com esse email
+        
+        """
+
+        user_account_model = (self.__session
+         .query(UserAccountModel)
+         .filter(UserAccountModel.email == email)
+         .first())
+        
+        if user_account_model is None:
+
+            return None
+        
+        return UserAccount(
+            user_account_model.name,
+            user_account_model.email,
+            user_account_model.password,
+            user_account_model.phone
+        )
+        
     
 
