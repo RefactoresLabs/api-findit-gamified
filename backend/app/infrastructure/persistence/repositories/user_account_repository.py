@@ -111,11 +111,9 @@ class UserAccountRepository(UserAccountRepositoryInterface):
             return None
         
         return UserAccount(
-            user_account_model.name,
-            user_account_model.email,
-            user_account_model.password,
-            user_account_model.phone
+            name=user_account_model.name,
+            email=user_account_model.email,
+            password=user_account_model.password,
+            phone=user_account_model.phone,
+            id=user_account_model.id,
         )
-        
-    
-
