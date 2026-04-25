@@ -22,7 +22,7 @@ class UserAccountRepository(UserAccountRepositoryInterface):
 
         self.__session = session
 
-    def create_new_user_account(self, user_account: UserAccount) -> None:
+    def create_new_user_account(self, user_account: UserAccount) -> UserAccount:
 
         """Cria uma nova instância da tabela user_account
 
@@ -37,15 +37,19 @@ class UserAccountRepository(UserAccountRepositoryInterface):
             Objeto da entidade conta de usuário com os dados armazenados
         """
 
-        user_account_registry = UserAccountModel(
+        user_account_model = UserAccountModel(
             name=user_account.name,
             email=user_account.email,
             password=user_account.password,
             phone=user_account.phone,
         )
 
-        self.__session.add(user_account_registry)
+        self.__session.add(user_account_model)
         self.__session.flush()
+
+        user_account._set_id(user_account_model.id)
+
+        return user_account_model
     
     def update_user_account(self, user_account: UserAccount, id: int) -> UserAccount:
 
@@ -111,9 +115,9 @@ class UserAccountRepository(UserAccountRepositoryInterface):
             return None
         
         return UserAccount(
+            id=user_account_model.id,
             name=user_account_model.name,
             email=user_account_model.email,
             password=user_account_model.password,
             phone=user_account_model.phone,
-            id=user_account_model.id,
         )
