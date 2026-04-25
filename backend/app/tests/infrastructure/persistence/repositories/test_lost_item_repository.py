@@ -251,7 +251,7 @@ def test_delete_lost_item_success(session, seed_data):
 
     assert is_row_deleted is True
 
-def test_delete_lost_item_fail(session, seed_data):
+def test_delete_lost_item_id_not_exists(session, seed_data):
 
     repo = LostItemRepository(session)
 
