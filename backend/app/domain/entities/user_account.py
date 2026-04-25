@@ -2,12 +2,15 @@ class UserAccount:
 
     """Representa a entidade conta de usuário da regra de negócio"""
 
-    def __init__(self, name: str, email: str, password: str, phone: str) -> None:
+    def __init__(self, id: int | None, name: str, email: str, password: str, phone: str) -> None:
 
         """Inicializa os atributos de instância de UserAccount
 
         Parameters
         ----------
+        id: int | None
+            Identificador da conta de usuário
+
         name: str
             Nome completo do usuário
         
@@ -21,10 +24,25 @@ class UserAccount:
             Telefone do usuário
         """
 
+        self.__id = id
         self.__name = name
         self.__email = email
         self.__password = password
         self.__phone = phone
+    
+    @property
+    def id(self) -> int:
+
+        """Obtém o identificador do usuário
+
+        Returns
+        -------
+        int
+            Identificador do usuário
+        
+        """
+
+        return self.__id
     
     @property
     def name(self) -> str:
@@ -81,3 +99,20 @@ class UserAccount:
         """
 
         return self.__phone
+    
+    def _set_id(self, id: int) -> None:
+
+        """Modifica o valor do atributo id da conta de usuário uma única vez, caso ela seja None no estado atual
+
+        Parameters
+        ----------
+        id: int
+            Valor a ser definido no atribtuo id
+        
+        """
+
+        if self.__id is not None:
+
+            raise ValueError("Valor de ID já definido!")
+        
+        self.__id = id
