@@ -69,15 +69,15 @@ CREATE TABLE item (
 );
 
 -- Item perdido (especialização)
-CREATE TABLE hidden_item (
+CREATE TABLE lost_item (
     id INTEGER,
-    hidden_space_id INTEGER NOT NULL,
+    lost_space_id INTEGER NOT NULL,
     PRIMARY KEY(id),
-    CONSTRAINT fk_hidden_item
+    CONSTRAINT fk_lost_item
         FOREIGN KEY (id)
         REFERENCES item(id),
-    CONSTRAINT fk_hidden_space
-        FOREIGN KEY (hidden_space_id)
+    CONSTRAINT fk_lost_space
+        FOREIGN KEY (lost_space_id)
         REFERENCES building_space(id)
 );
 
