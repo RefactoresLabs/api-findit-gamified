@@ -13,15 +13,18 @@ class UserAccount:
 
         name: str
             Nome completo do usuário
-        
+
         email: str
             E-mail do usuário
-        
+
         password: str
             Senha do usuário
-        
+
         phone: str
             Telefone do usuário
+
+        id: int | None
+            Identificador único da conta. Opcional (gerado pelo banco)
         """
 
         self.__id = id
@@ -31,19 +34,19 @@ class UserAccount:
         self.__phone = phone
     
     @property
-    def id(self) -> int:
+    def id(self) -> int | None:
 
-        """Obtém o identificador do usuário
+        """Obtém o identificador da conta de usuário
 
         Returns
         -------
-        int
-            Identificador do usuário
-        
+        int | None
+            ID da conta ou None se ainda não persistida
+
         """
 
         return self.__id
-    
+
     @property
     def name(self) -> str:
 
@@ -53,7 +56,7 @@ class UserAccount:
         -------
         str
             Nome completo do usuário
-        
+
         """
 
         return self.__name
