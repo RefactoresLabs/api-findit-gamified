@@ -2,7 +2,6 @@ from flask import Flask
 
 from backend.app.presentation.routers.user_account_routes import create_user_account_routes
 from backend.app.presentation.routers.login_routes import create_login_routes
-from backend.app.presentation.routers.item_routes import create_item_routes
 
 def create_app() -> Flask:
 
@@ -19,6 +18,5 @@ def create_app() -> Flask:
 
     create_user_account_routes(app) # Rotas das contas de usuários
     create_login_routes(app)         # Rotas de autenticação
-    create_item_routes(app)          # Rotas de itens
 
     return app
